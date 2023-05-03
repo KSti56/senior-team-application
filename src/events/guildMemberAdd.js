@@ -4,7 +4,6 @@
  * @module events/guildMemberAdd
  */
 
-const client = require('../')
 const debug = require('debug')('event')
 const config = require('../config')
 
@@ -18,10 +17,10 @@ module.exports = member => {
     debug(`guildMemberAdd (${member.user.tag})`)
 
     if (config.Join.Message.Enabled) {
-        const joinMessage = configureMessage(config.Join.Message.Content, member)
+        const joinMessage = configureMessage(config.Messages.Join, member)
 
         const channels = config.Join.Message.Channels.map(channel =>
-            client.channels.cache.find(c => c.name.toLowerCase() === channel.toLowerCase())
+            member.guild.channels.cache.find(c => c.name.toLowerCase() === channel.toLowerCase())
         ).filter(channel => channel)
 
         channels.forEach(channel => {

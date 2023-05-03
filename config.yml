@@ -29,7 +29,7 @@ Join:
     "What kind of games do you like to play?":
       - Role: Minecraft
         Description: Join the Minecraft group!
-        Emoji: 🦗
+        Emoji: 🛡️
       - Role: Among Us
         Description: Join the Among Us group!
         Emoji: 🎮
@@ -110,7 +110,7 @@ CustomCommands:
 ########################################
 Messages:
   Join:
-    Text: {user-mention}
+    Text: "{user-mention}"
     Title: Welcome to the server!
     Description: Hey {user-mention}, thanks for joining the server!
     Components:
@@ -172,3 +172,6 @@ Messages:
   TriviaEnd:
     Title: 👑 Game Over!
     Description: "{winner-mention} won, congratulations! Better luck next time, {loser-mention}. The final score was {winner-score}-{loser-score}."
+  RoleSelectionComplete:
+    Title: ✅ Selection Complete
+    Description: "The role selection process is now complete. Thank you!"
