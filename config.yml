@@ -40,24 +40,18 @@ Join:
 #                                      #
 ########################################
 AutoMod:
+  MuteRole: "Muted"
   BypassRoles:
     - Admin
     - Owner
   Filter:
     List: [word1, word2]
-    Cooldown: 60s
-    Message:
-      Title: You cannot say that!
+    Cooldown: 30m
     Actions:
       3: 
-        Action: tempmute-10m
-  AntiAdvertisement:
-    Cooldown: 120s
-    Message:
-      Title: You cannot advertise here!
-    Actions:
-      2:
-        Action: tempmute-60m
+        Tempmute: 30s
+      5: 
+        Tempmute: 5m
   
 ########################################
 #                                      #
@@ -74,12 +68,14 @@ Trivia:
 #                                      #
 ########################################
 Commands:
-  Stats:
-    Name: stats
-    Description: "View server stats!"
+  Poll:
+    Permission: Admin
+    Name: poll
+    Description: "Create a poll for users to vote on!"
   Trivia:
     Name: trivia
     Description: "Play trivia against a user!"
+  
 
 ########################################
 #                                      #
@@ -109,6 +105,8 @@ CustomCommands:
 #                                      #
 ########################################
 Messages:
+  NoPermission:
+    Title: ":x: You do not have permission to run this command."
   Join:
     Text: "{user-mention}"
     Title: Welcome to the server!
@@ -175,3 +173,47 @@ Messages:
   RoleSelectionComplete:
     Title: ✅ Selection Complete
     Description: "The role selection process is now complete. Thank you!"
+  Filter:
+    Text: "{user-mention}"
+    Title: ❌ You can't say that here!
+    Description: This is a warning. Continued infractions will result in being muted.
+    Footer: "Infraction #{infractions}"
+  Tempmute:
+    Text: "{user-mention}"
+    Title: 🔨 You've been muted
+    Description: "{user-mention} has been muted for repeated rule infractions. The mute will last for **{duration}.**"
+    Footer: "Infraction #{infractions}"
+  CreatePoll:
+    Title: 🏗️ Create a Poll
+    Description: Use the buttons below to configure options for this poll.
+    Fields:
+      - Name: Title
+        Value: ":x: Not Set"
+      - Name: Description
+        Value: ":x: Not Set"
+      - Name: Options
+        Value: ":x: Not Set"
+    Components:
+      -
+        - Type: button
+          CustomID: poll-set-title
+          Label: "Set Title"
+          Emoji: ✏️
+          Style: Secondary
+        - Type: button
+          CustomID: poll-set-description
+          Label: "Set Description"
+          Emoji: ✏️
+          Style: Secondary
+        - Type: button
+          CustomID: poll-add-option
+          Label: "Add Option"
+          Emoji: 🔨
+          Style: Primary
+        - Type: button
+          CustomID: poll-send
+          Label: "Send Poll"
+          Emoji: 📩
+          Style: Success
+  NotEnoughInformation:
+    Title: ":x: There is not yet enough information to send the poll. Please configure it and try again."
