@@ -188,11 +188,11 @@ Messages:
     Description: Use the buttons below to configure options for this poll.
     Fields:
       - Name: Title
-        Value: ":x: Not Set"
+        Value: "{title}"
       - Name: Description
-        Value: ":x: Not Set"
+        Value: "{description}"
       - Name: Options
-        Value: ":x: Not Set"
+        Value: "{options}"
     Components:
       -
         - Type: button
@@ -216,4 +216,10 @@ Messages:
           Emoji: 📩
           Style: Success
   NotEnoughInformation:
-    Title: ":x: There is not yet enough information to send the poll. Please configure it and try again."
+    Title: "❌ There is not yet enough information to send the poll. Please configure it and try again."
+  PollSent:
+    Title: "✅ The poll has been sent!"
+  Poll:
+    Title: "{title}"
+    Description: "{description}\n\n{options}"
+    Footer: "Hosted by {user-tag}"
