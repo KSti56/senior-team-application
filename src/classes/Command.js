@@ -4,7 +4,6 @@
  */
 
 const config = require('../config')
-const Option = require('./discord/Option')
 const debug = require('debug')('command')
 const getCaseInsensitiveProperty = require('../utils/getCaseInsensitiveProperty')
 
