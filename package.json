@@ -1,0 +1,32 @@
+{
+  "name": "senior-team-application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js",
+    "windowsDebug": "@powershell -Command $env:DEBUG='*';node ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^8.3.0",
+    "chalk": "^4.1.2",
+    "console-stamp": "^3.1.1",
+    "debug": "^4.3.4",
+    "discord.js": "^14.9.0",
+    "html-entities": "^2.3.3",
+    "node-fetch": "^2.6.9",
+    "parse-duration": "^1.0.3",
+    "yaml": "^2.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.39.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1"
+  }
+}
