@@ -12,11 +12,13 @@ debug('Loading better-sqlite3')
 
 const db = require('better-sqlite3')('main.db')
 db.prepare('CREATE TABLE IF NOT EXISTS message_stats (serverId, userId, timestamp)').run()
+db.prepare('CREATE TABLE IF NOT EXISTS mutes (serverId, userId, endsAt)').run()
 
 debug('Loaded better-sqlite3')
 
 const EventHandler = require('./handlers/EventHandler')
 const CommandHandler = require('./handlers/CommandHandler')
+const TempMuteHandler = require('./handlers/TempMuteHandler')
 
 const client = new Client({
     autoReconnect: true,
@@ -66,6 +68,8 @@ client.login(config.Token)
         debug('Running CommandHandler#register')
         CommandHandler.register()
         debug('Finished running CommandHandler#register')
+
+        TempMuteHandler()
     })
     .catch((err) => {
         if (err.toString().includes('TokenInvalid')) {

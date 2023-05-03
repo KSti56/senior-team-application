@@ -56,7 +56,7 @@ module.exports = async interaction => {
         const actionRow = new ActionRowBuilder().addComponents(menu)
 
         await reply({ embeds: [embed], components: [actionRow], ephemeral: true })
-        
+
         awaitSelectMenu(currentReply, interaction.member)
             .then(async interaction => {
                 interaction.deferUpdate()
