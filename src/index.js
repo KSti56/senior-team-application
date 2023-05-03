@@ -11,8 +11,11 @@ const debug = require('debug')('startup')
 debug('Loading better-sqlite3')
 
 const db = require('better-sqlite3')('main.db')
-db.prepare('CREATE TABLE IF NOT EXISTS message_stats (serverId, userId, timestamp)').run()
-db.prepare('CREATE TABLE IF NOT EXISTS mutes (serverId, userId, endsAt)').run()
+db.prepare('CREATE TABLE IF NOT EXISTS message_stats (serverId TEXT, userId TEXT, timestamp TEXT)').run()
+db.prepare('CREATE TABLE IF NOT EXISTS mutes (serverId TEXT, userId TEXT, endsAt TEXT)').run()
+db.prepare('CREATE TABLE IF NOT EXISTS polls (pollId TEXT, title TEXT, description TEXT)').run()
+db.prepare('CREATE TABLE IF NOT EXISTS poll_options (optionId INTEGER, pollId TEXT, name TEXT, emoji TEXT)').run()
+db.prepare('CREATE TABLE IF NOT EXISTS poll_votes (pollId TEXT, userId TEXT, optionId INTEGER)').run()
 
 debug('Loaded better-sqlite3')
 

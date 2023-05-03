@@ -8,6 +8,7 @@ const debug = require('debug')('event')
 const config = require('../config')
 const CommandHandler = require('../handlers/CommandHandler')
 const RoleSelectorHandler = require('../handlers/RoleSelectorHandler')
+const PollVoteHandler = require('../handlers/PollVoteHandler')
 
 module.exports = interaction => {
     debug('interactionCreate')
@@ -19,5 +20,9 @@ module.exports = interaction => {
 
     if (interaction.isButton() && interaction.customId === config.Messages.Join.Components[0][0].CustomID) {
         RoleSelectorHandler(interaction)
+    }
+
+    if (interaction.isButton() && interaction.customId.startsWith('vote-')) {
+        PollVoteHandler(interaction)
     }
 }

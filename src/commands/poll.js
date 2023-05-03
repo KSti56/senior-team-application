@@ -12,6 +12,8 @@ const awaitModalSubmit = require('../utils/awaitModalSubmit')
 const { ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const _ = require('lodash')
 
+const db = require('better-sqlite3')('main.db')
+
 const customIds = {
     setTitle: config.Messages.CreatePoll.Components[0][0].CustomID,
     setDescription: config.Messages.CreatePoll.Components[0][1].CustomID,
@@ -128,7 +130,7 @@ module.exports = new Command()
                             },
                             {
                                 name: 'options',
-                                value: options.map(option => `${option.emoji} **${option.name}**`).join('\n')
+                                value: options.map(option => `${option.emoji} **${option.name}** (0)`).join('\n')
                             }
                         ])
 
@@ -136,8 +138,8 @@ module.exports = new Command()
                             .map((chunk, i) => new ActionRowBuilder()
                                 .addComponents(chunk.map((option, optionIndex) => {
                                     const button = new ButtonBuilder()
-                                        .setCustomId(`vote-${i}-${optionIndex}`)
-                                        .setLabel(`${option.name} (0)`)
+                                        .setCustomId(`vote-${i * 5 + optionIndex}`)
+                                        .setLabel(`${option.name}`)
                                         .setStyle(ButtonStyle.Primary)
                                     if (option.emoji) button.setEmoji(option.emoji)
 
@@ -145,7 +147,12 @@ module.exports = new Command()
                                 }))
                             )
 
-                        interaction.channel.send(Object.assign({}, pollEmbed, { components }))
+                        interaction.channel.send(Object.assign({}, pollEmbed, { components })).then(msg => {
+                            db.prepare('INSERT INTO polls VALUES (?, ?, ?)').run(msg.id, title, description)
+                            options.forEach((option, optionId) => {
+                                db.prepare('INSERT INTO poll_options VALUES (?, ?, ?, ?)').run(optionId, msg.id, option.name, option.emoji || '')
+                            })
+                        })
 
                         interaction.editReply(configureMessage(config.Messages.PollSent, interaction.member))
                     } else if (customId === customIds.setTitle) {
