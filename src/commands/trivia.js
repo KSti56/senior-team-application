@@ -53,6 +53,10 @@ module.exports = new Command()
                 let currentQuestionIndex = 0
                 const scores = { 0: 0, 1: 0 }
 
+                /**
+                 * @function askQuestion Ask a question to a player
+                 * @param {number} player The index of the player to ask the question to
+                 */
                 const askQuestion = async player => {
                     const question = triviaData[currentQuestionIndex]
                     const answers = [...question.incorrect_answers.map(decodeHTMLEntities), decodeHTMLEntities(question.correct_answer)].sort(() => Math.random() - 0.5)
@@ -96,6 +100,10 @@ module.exports = new Command()
 
                     await interaction.editReply(questionEmbed)
 
+                    /**
+                     * @function endTurn End the current turn
+                     * @returns {Promise<void>}
+                     */
                     const endTurn = () => {
                         if (currentQuestionIndex === triviaData.length - 1) {
                             if (scores[0] === scores[1]) {

@@ -6,20 +6,30 @@
 const { ApplicationCommandOptionType } = require('discord.js')
 const getCaseInsensitiveProperty = require('../../utils/getCaseInsensitiveProperty')
 
+/**
+ * @class Option
+ */
 module.exports = class Option {
+    /**
+     * @constructor Option Class
+     * @param {object} param0 Option data
+     * @param {string} param0.name The name of the option.
+     * @param {string=} param0.description The description of the option.
+     * @param {ApplicationCommandOptionType=} param0.type The option type.
+     * @param {boolean=} param0.required Whether or not the option is required.
+     * @param {Option[]=} param0.options The sub-options of the option.
+     */
     constructor ({
         name = null,
         description = 'No description provided.',
         type = ApplicationCommandOptionType.String,
         required = false,
-        choices = [],
         options = []
     }) {
         this.name = name
         this.description = description
         this.type = type
         this.required = required
-        this.choices = choices
         this.options = options
     }
 
@@ -33,7 +43,6 @@ module.exports = class Option {
             description: this.description,
             type: getCaseInsensitiveProperty(ApplicationCommandOptionType, this.type),
             required: this.required,
-            choices: this.choices,
             options: this.options
         }
     }

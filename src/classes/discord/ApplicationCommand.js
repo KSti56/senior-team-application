@@ -1,13 +1,14 @@
 /**
- * @file Class to handle context menus, slash commands, etc. (all classified under application commands)
  * @author ThisLightMan <light@corebot.dev>
+ * @file Class to handle context menus, slash commands, etc. (all classified under application commands)
+ * @module classes/discord/ApplicationCommand
  */
 
 const { ApplicationCommandType } = require('discord.js')
 
 module.exports = class ApplicationCommand {
     /**
-     * Application Command Class
+     * @constructor Application Command Class
      * @param {object} param0 Application Command Options
      * @param {string} param0.name The name of the command.
      * @param {string} param0.description The description of the command.
@@ -26,6 +27,10 @@ module.exports = class ApplicationCommand {
         this.type = type
     }
 
+    /**
+     * Format the command data for the Discord API
+     * @returns {object} The Discord API command data
+     */
     formatData () {
         return {
             type: this.type,

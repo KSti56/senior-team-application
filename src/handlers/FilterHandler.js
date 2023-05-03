@@ -1,3 +1,9 @@
+/**
+ * @author ThisLightMan <light@corebot.dev>
+ * @file Filter Handler
+ * @module handlers/FilterHandler
+ */
+
 const config = require('../config')
 const configureMessage = require('../utils/configureMessage')
 
@@ -7,6 +13,11 @@ const filterCooldownMs = parseDuration(config.AutoMod.Filter.Cooldown)
 
 const db = require('better-sqlite3')('main.db')
 
+/**
+ * Filter Handler
+ * @param {Message} message The message to filter
+ * @returns {<void>}
+ */
 module.exports = message => {
     const bypassRoles = config.AutoMod.BypassRoles
         .map(role => message.guild.roles.cache.find(r => r.name.toLowerCase() === role.toLowerCase()))

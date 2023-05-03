@@ -1,6 +1,7 @@
 /**
- * @file Event Handler
  * @author ThisLightMan <light@corebot.dev>
+ * @file Event Handler
+ * @module handlers/EventHandler
  */
 
 const fs = require('fs')

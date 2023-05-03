@@ -7,6 +7,11 @@
 const db = require('better-sqlite3')('main.db')
 const FilterHandler = require('../handlers/FilterHandler')
 
+/**
+ * @event messageCreate
+ * @param {Message} message The message that was created
+ * @returns {<void>}
+ */
 module.exports = message => {
     if (message.author.bot) return
     if (message.channel.type === 'DM') return

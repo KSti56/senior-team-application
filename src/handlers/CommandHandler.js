@@ -1,6 +1,7 @@
 /**
- * @file Command Handler
  * @author ThisLightMan <light@corebot.dev>
+ * @file Command Handler
+ * @module handlers/CommandHandler
  */
 
 const fs = require('fs')

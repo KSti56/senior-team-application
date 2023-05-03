@@ -10,6 +10,10 @@ const CommandHandler = require('../handlers/CommandHandler')
 const RoleSelectorHandler = require('../handlers/RoleSelectorHandler')
 const PollVoteHandler = require('../handlers/PollVoteHandler')
 
+/**
+ * @event interactionCreate
+ * @param {Interaction} interaction The interaction that was created
+ */
 module.exports = interaction => {
     debug('interactionCreate')
 

@@ -11,7 +11,7 @@ const SlashCommand = require('./discord/SlashCommand')
 
 module.exports = class Command {
     /**
-     * @constructor Command
+     * @constructor Command Class
      * @param {object} param0 Command Options
      * @param {string} param0.name The name of the command.
      * @param {string} param0.description The description of the command.

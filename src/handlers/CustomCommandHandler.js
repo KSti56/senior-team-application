@@ -1,3 +1,9 @@
+/**
+ * @author ThisLightMan <light@corebot.dev>
+ * @file Custom Command Handler
+ * @module handlers/CustomCommandHandler
+ */
+
 const configureMessage = require('../utils/configureMessage')
 const getCaseInsensitiveProperty = require('../utils/getCaseInsensitiveProperty')
 const getMessageStats = require('../utils/getMessageStats')
