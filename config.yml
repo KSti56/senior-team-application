@@ -1,0 +1,173 @@
+########################################
+#                                      #
+#               BOT TOKEN              #
+#                                      #
+#     This token can be obtained in    # 
+#      the Discord developer portal    #
+#                                      #
+########################################
+
+########################################
+#                                      #
+#                  JOIN                #
+#                                      #
+########################################
+Join:
+  Message:
+    Enabled: true
+    Channels: 
+      - welcome
+  RoleSelection:
+    "What kind of pings would you like to receive?":
+      - Role: Announcements
+        Description: Receive pings for all server announcements
+        Emoji: 📢
+      - Role: Giveaways
+        Description: Receive pings for all server giveaways
+        Emoji: 🛍️
+    "What kind of games do you like to play?":
+      - Role: Minecraft
+        Description: Join the Minecraft group!
+        Emoji: 🦗
+      - Role: Among Us
+        Description: Join the Among Us group!
+        Emoji: 🎮
+
+########################################
+#                                      #
+#                AUTOMOD               #
+#                                      #
+########################################
+AutoMod:
+  BypassRoles:
+    - Admin
+    - Owner
+  Filter:
+    List: [word1, word2]
+    Cooldown: 60s
+    Message:
+      Title: You cannot say that!
+    Actions:
+      3: 
+        Action: tempmute-10m
+  AntiAdvertisement:
+    Cooldown: 120s
+    Message:
+      Title: You cannot advertise here!
+    Actions:
+      2:
+        Action: tempmute-60m
+  
+########################################
+#                                      #
+#                  TRIVIA              #
+#                                      #
+########################################
+Trivia:
+  # Generate at https://opentdb.com/api_config.php
+  URL: "https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple"
+
+########################################
+#                                      #
+#                COMMANDS              #
+#                                      #
+########################################
+Commands:
+  Stats:
+    Name: stats
+    Description: "View server stats!"
+  Trivia:
+    Name: trivia
+    Description: "Play trivia against a user!"
+
+########################################
+#                                      #
+#            CUSTOM COMMANDS           #
+#                                      #
+########################################
+CustomCommands:
+  - Name: onlineusers
+    Description: See how many users are online.
+    Message:
+      Title: 👥 Online Users
+      Description: There are currently **{online-users} users** online.
+  - Name: messageactivity
+    Description: See the number of messages in the past hour.
+    Message:
+      Title: 📈 Message Activity
+      Description: In the past hour, **{messages-1h} messages** have been sent in this server.
+  - Name: topusers
+    Description: See a list of the users with the most messages in the past hour.
+    Message:
+      Title: 👑 Top Users
+      Description: "{top-users-1h}"
+
+########################################
+#                                      #
+#                MESSAGES              #
+#                                      #
+########################################
+Messages:
+  Join:
+    Text: {user-mention}
+    Title: Welcome to the server!
+    Description: Hey {user-mention}, thanks for joining the server!
+    Components:
+      -
+        - Type: button
+          CustomID: select-roles
+          Label: "Select Roles!"
+          Emoji: "➕"
+          Style: Success
+  ServerStats:
+    Title: "{server-name}'s Stats"
+    Fields:
+      - Name: 👤 Owner
+        Value: "{server-owner-mention}"
+      - Name: ⏲️ Created
+        Value: "{server-created-relative}"
+      - Name: 📊 Analytics
+        Value: "**# of channels:** {server-channel-count} channels\n**# of roles:** {server-role-count} roles\n**# of users:** {server-user-count} users"
+      - Name: ⌨️ Activity
+        Value: "**Messages in the last hour:** {server-activity-messages} messages\n**Users Online:** {server-activity-users}"
+  CouldNotFetchTrivia:
+    Title: "There was an error while fetching the trivia questions"
+    Color: "#b81111"
+  TriviaChallenge:
+    Text: "{user-mention} {opponent-mention}"
+    Title: "❔ Trivia Challenge!"
+    Description: "Hello {opponent-mention}, {user-mention} has challenged you to a round of trivia. Would you like to play?"
+    Components:
+      -
+        - Type: button
+          CustomID: trivia-yes
+          Label: "Yes"
+          Style: Success
+        - Type: button
+          CustomID: trivia-no
+          Label: "No"
+          Style: Danger
+  TriviaChallengeTimedOut:
+    Title: The trivia request timed out.
+    Color: "#b81111"
+  TriviaDenied:
+    Title: The trivia request was denied.
+    Color: "#b81111"
+  TriviaQuestion:
+    Title: ❔ Trivia Question!
+    Description: It's {user-mention}'s turn.
+    Fields:
+      - Name: Question {question-number}/5
+        Value: "**{question}**"
+  TriviaCorrect:
+    Title: ✅ Correct!
+    Description: "{user-mention} got the question correct."
+  TriviaIncorrect:
+    Title: ❌ Incorrect
+    Description: "{user-mention}, unfortunately that was the incorrect answer. The correct answer would have been **{correct-answer}**."
+  TriviaTie:
+    Title: 👑 Game Over!
+    Description: "It's a **tie!** The final score between {user-mention} and {opponent-mention} was {score}-{score}."
+  TriviaEnd:
+    Title: 👑 Game Over!
+    Description: "{winner-mention} won, congratulations! Better luck next time, {loser-mention}. The final score was {winner-score}-{loser-score}."
